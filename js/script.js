@@ -85,12 +85,12 @@ var partyEvent = function() {
       isPartyTime = true;
       time = partyTime;
       partyTimeButton.innerText = "PARTY TIME!";
-      partyTimeButton.style.backgroundColor = "#222";
+      partyTimeButton.style.backgroundColor = "#FF56A6";
    } else {
       isPartyTime = false;
       time = new Date().getHours();
       partyTimeButton.innerText = "PARTY OVER";
-      partyTimeButton.style.backgroundColor = "green";
+      partyTimeButton.style.backgroundColor = "#222";
    }
 };
 
