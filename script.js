@@ -1,16 +1,26 @@
 var time = new Date().getHours();
-var messageText;
+
 var noon = 12;
 var evening = 18; // 6PM
 var wakeupTime = 9; // 9AM
 var lunchTime = 12; // 12PM
 var partyTime = 17; // 5PM
 var napTime = lunchTime + 2; // 2PM
-var message = document.getElementById("timeEvent");
-var lolcat = document.getElementById('lolcat');
+
 var partyTimeButton = document.getElementById("partyTimeButton");
+var napTimeSelector = document.getElementById("napTimeSelector");
+var lunchTimeSelector = document.getElementById("lunchTimeSelector");
+var wakeUpTimeSelector = document.getElementById("wakeUpTimeSelector");
 var isPartyTime = false;
-var image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat5.jpg";
+
+var updateClock = function()
+{
+	var message = document.getElementById("timeEvent");
+	var lolcat = document.getElementById('lolcat');
+	var messageText;
+	var image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat5.jpg";
+
+//sayings for each time
 if (time == partyTime){
 	image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/08/partyTime.jpg";
     messageText = "IZ PARTEE TIME!!";
@@ -34,10 +44,11 @@ if (time == partyTime){
 message.innerText = messageText;
 lolcat.src = image;
 
-var updateClock = function()
-{
-var showCurrentTime = function()
-{
+showCurrentTime();
+};
+//end
+
+var showCurrentTime = function() {
     // display the string on the webpage
     var clock = document.getElementById('clock');
 
@@ -74,24 +85,39 @@ var showCurrentTime = function()
 
     clock.innerText = clockTime;
 };
-showCurrentTime();
-};
-updateClock();
+
+
 var oneSecond = 1000;
 setInterval( updateClock, oneSecond);
+
+//partytime button
 var partyEvent = function() {
 
    if (isPartyTime === false) {
       isPartyTime = true;
       time = partyTime;
       partyTimeButton.innerText = "PARTY TIME!";
-      partyTimeButton.style.backgroundColor = "#FF56A6";
+      partyTimeButton.style.backgroundColor = "#222";
    } else {
       isPartyTime = false;
       time = new Date().getHours();
       partyTimeButton.innerText = "PARTY OVER";
-      partyTimeButton.style.backgroundColor = "#222";
+      partyTimeButton.style.backgroundColor = "#0A8DAB";
    }
+};
+var lunchEvent = function() {
+    lunchTime = lunchTimeSelector.value;
+};
+
+var wakeUpEvent = function() {
+    wakeupTime = wakeUpTimeSelector.value;
+};
+
+var napEvent = function() {
+    napTime = napTimeSelector.value;
 };
 
 partyTimeButton.addEventListener('click', partyEvent);
+napTimeSelector.addEventListener('change', napEvent);
+lunchTimeSelector.addEventListener('change', lunchEvent);
+wakeUpTimeSelector.addEventListener('change', wakeUpEvent);
